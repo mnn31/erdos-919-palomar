@@ -1,0 +1,129 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Reductions for Erdős Problem 919"
+  description: >-
+    Erdős Problem 919 asks for a graph on the ordinal omega_2 squared with chromatic number
+    aleph_2, or aleph_1, such that every subgraph on a vertex set of smaller order type has
+    chromatic number at most aleph_0. This formalization proves in ZFC that the aleph_2 question
+    is equivalent to the first question of Erdős Problem 918, that the aleph_1 question is
+    equivalent to the existence of a graph on aleph_2 vertices that is not countably chromatic
+    although all its subgraphs on aleph_1 vertices are, that the aleph_2 question implies the
+    aleph_1 question, and that the aleph_1 question has a positive answer under the continuum
+    hypothesis. The proof blows a graph on omega_2 up to a graph on omega_2 times omega_2 in the
+    lexicographic order. It does not settle either question in ZFC.
+  authors:
+    - "Manan Gupta"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Manan Gupta"
+
+classification:
+  arxiv: ["math.CO", "math.LO"]
+  msc2020: ["05C15", "03E05"]
+
+sources:
+  - title: "ZFC reductions of Erdős Problem 919 to Problem 918(i) and to countable chromatic compactness at aleph_2, by a general blow-up construction"
+    type: original-proof
+    relationship: other
+    note: >-
+      A literature check on 2026-10-12 found no earlier source for the general blow-up or for
+      these equivalences. It could not read two paywalled surveys by Komjáth (Bull. Symb. Log. 31 (2025) 418-461, and
+      Erdős's work on infinite graphs, Erdős Centennial, 2013), so an earlier mention cannot be
+      ruled out. The argument is elementary.
+  - title: "Problems and results in chromatic graph theory"
+    authors:
+      - "P. Erdős"
+    type: paper
+    location: "Proof Techniques in Graph Theory, Academic Press (1969), 27-35"
+    relationship: background
+    note: "Poses the questions recorded as Problem 919."
+    author_endorsement: n/a
+  - title: "On chromatic number of infinite graphs"
+    authors:
+      - "P. Erdős"
+      - "A. Hajnal"
+    type: paper
+    location: "Theory of Graphs (Proc. Colloq., Tihany, 1966), Academic Press (1968), 83-98"
+    relationship: other
+    note: >-
+      The continuum hypothesis step formalizes their shift graph, and the blow-up with a complete
+      graph on omega_1 is their example on omega_1 squared. The general blow-up and the
+      equivalences are not in this paper.
+    author_endorsement: n/a
+  - title: "Erdős Problem 919"
+    authors:
+      - "T. Bloom"
+    type: web discussion
+    location: "https://www.erdosproblems.com/919"
+    relationship: background
+    note: "Statement of the problem."
+    author_endorsement: not-contacted
+
+related_formalizations:
+  - id: "https://github.com/mnn31/erdos-lean/blob/e7de340be9c1828da18538feb254ee9dfcf3af42/ErdosLean/Erdos919.lean"
+    relationship: supersedes
+    note: "My earlier version of the same proof, on Lean 4.33.1, which imports formal-conjectures."
+  - id: "https://github.com/google-deepmind/formal-conjectures/pull/7250"
+    relationship: other
+    note: "Adds Problem 919 to formal-conjectures with these four statements."
+
+status:
+  scope: >-
+    Formalized: the four theorems in Challenge.lean, namely the two equivalences, the implication
+    from the aleph_2 question to the aleph_1 question, and the positive answer to the aleph_1
+    question under the continuum hypothesis. Not formalized: the independence of the aleph_2
+    question from ZFC, which needs the published consistency results of Baumgartner, Shelah, and
+    Foreman and Laver. The two questions themselves are not proved or refuted. The aleph_1
+    question in ZFC remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: copilot
+      framework: "Claude Code"
+      tool_setup: >-
+        Claude provided minor assistance with drafting and formatting Lean statements.
+  notes: >-
+    AI use was limited to minor drafting and formatting assistance.
+    Manan Gupta selected the problem, directed the work, and is responsible for this submission.
+
+fidelity:
+  divergences: >-
+    Mathlib has no chromatic cardinal of a graph, so Challenge.lean defines
+    SimpleGraph.chromaticCardinal, with the same definition as formal-conjectures. Problem 918(i)
+    is written out in the first equivalence, since this project does not import
+    formal-conjectures. The page states the problem for subgraphs and the Lean statements use
+    induced subgraphs. For an upper bound on the chromatic number these agree.
+
+review:
+  status: self-assessed
+
+alignment:
+  namespace: "Erdos919"
+  statements:
+    - source: "Problem 919 with chromatic number aleph_2, against Problem 918(i)"
+      lean: "Erdos919.erdos_919.variants.iff_erdos_918_i"
+      module: "Challenge"
+      status: "proved"
+      note: "An equivalence between the two questions. It does not answer either one."
+    - source: "Problem 919 with chromatic number aleph_1"
+      lean: "Erdos919.erdos_919.variants.aleph_1_iff"
+      module: "Challenge"
+      status: "proved"
+      note: "An equivalence with countable chromatic incompactness at aleph_2. The question stays open in ZFC."
+    - source: "Relation between the two questions of Problem 919"
+      lean: "Erdos919.erdos_919.variants.aleph_2_imp_aleph_1"
+      module: "Challenge"
+      status: "proved"
+      note: "A positive answer to the aleph_2 question gives one to the aleph_1 question."
+    - source: "Problem 919 with chromatic number aleph_1 under CH"
+      lean: "Erdos919.erdos_919.variants.aleph_1_of_CH"
+      module: "Challenge"
+      status: "proved"
+      note: "Uses the Erdős and Hajnal shift graph."
+
+acknowledgements: "Built on Mathlib. The statements follow the formal-conjectures project."

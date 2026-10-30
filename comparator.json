@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Erdos919.erdos_919.variants.iff_erdos_918_i",
+    "Erdos919.erdos_919.variants.aleph_1_iff",
+    "Erdos919.erdos_919.variants.aleph_2_imp_aleph_1",
+    "Erdos919.erdos_919.variants.aleph_1_of_CH"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
